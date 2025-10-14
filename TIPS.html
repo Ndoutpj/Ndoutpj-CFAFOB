@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AgriMate — Smart Farming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7faf7;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --accent-green:#2f7a3e;
+      --green-gradient: linear-gradient(90deg,#2d6b36 0%, #8fbf86 100%);
+      --glass: rgba(255,255,255,0.7);
+      --shadow: 0 8px 20px rgba(15,23,42,0.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:var(--bg);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+    }
+    .container{max-width:1100px;margin:0 auto}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(180deg,#1b6b2f,#2f7a3e);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav{display:flex;gap:18px;align-items:center;color:var(--accent-green)}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+    .cta{display:flex;gap:10px}
+    .btn{padding:8px 14px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:var(--card);cursor:pointer;font-weight:600}
+    .btn.primary{background:var(--accent-green);color:#fff;border:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start;margin-bottom:36px}
+    .hero-left{background:transparent}
+    .weather-card{background:linear-gradient(90deg,#2b84d1,#2b9ad1);color:#fff;padding:22px;border-radius:14px;box-shadow:var(--shadow);position:relative}
+    .weather-top{display:flex;justify-content:space-between;align-items:center}
+    .location{font-weight:700}
+    .temp{font-size:48px;font-weight:700}
+    .weather-forecast{display:flex;gap:8px;margin-top:18px}
+    .forecast-day{flex:1;background:rgba(255,255,255,0.08);padding:10px;border-radius:8px;text-align:center}
+
+    .community{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);}
+    .community h4{margin:0 0 8px 0}
+    .metrics{display:flex;gap:12px;flex-wrap:wrap}
+    .metric{flex:1;min-width:120px}
+    .metric .num{font-weight:700}
+
+    /* Tools */
+    .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:42px}
+    .tool{padding:20px;border-radius:12px;color:#fff;min-height:110px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between}
+    .tool h3{margin:0;font-size:16px}
+    .tool p{margin:6px 0 0 0;font-size:13px;opacity:0.95}
+    .tool.water{background:linear-gradient(135deg,#2b7a4a,#6dbd6e)}
+    .tool.seed{background:linear-gradient(135deg,#1fa3a3,#5ad0c9)}
+    .tool.worker{background:linear-gradient(135deg,#a86b3a,#d99c6f)}
+    .tool.tips{background:linear-gradient(135deg,#f6a84d,#f9c28a)}
+
+    /* Featured */
+    .featured{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-bottom:32px}
+    .card{background:var(--card);padding:0;border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+    .card .content{padding:18px}
+    .soil-image{height:220px;background-image:linear-gradient(180deg,#0f172a20,#0f172a00);background-size:cover;display:flex;align-items:end;padding:18px;color:#fff}
+    .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:18px}
+    .gallery-grid img{width:100%;height:100px;object-fit:cover;border-radius:8px;background:#e6eef0}
+
+    /* CTA */
+    .cta-banner{border-radius:12px;padding:26px;background:var(--green-gradient);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}
+    .cta-buttons{display:flex;gap:12px}
+    .cta .btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff}
+
+    footer{display:flex;align-items:center;justify-content:center;color:var(--muted);gap:8px;padding:12px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .featured{grid-template-columns:1fr}
+      .tools{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      body{padding:16px}
+      .tools{grid-template-columns:1fr}
+      nav{display:none}
+    }
+    /* TIPS PAGE STYLES */
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.header .tags span {
+  margin: 0 5px;
+  font-size: 0.9rem;
+  background: #e9f5ec;
+  padding: 4px 10px;
+  border-radius: 15px;
+  display: inline-block;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 1rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.filter-bar button {
+  padding: 8px 15px;
+  border: none;
+  background: #eee;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-bar button.active {
+  background-color: #1a472a;
+  color: white;
+}
+
+.filter-bar input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  min-width: 200px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card .content {
+  padding: 1rem;
+}
+
+.card .label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.card ul {
+  padding-left: 1.2rem;
+}
+
+.card .season {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  color: white;
+}
+
+.spring { background: #4caf50; }
+.summer { background: #ff9800; }
+.fall { background: #795548; }
+.winter { background: #2196f3; }
+
+.card.beginner { border-left: 5px solid #4caf50; }
+.card.intermediate { border-left: 5px solid #ff9800; }
+.card.advanced { border-left: 5px solid #f44336; }
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  background: #f1f1f1;
+}
+
+.footer .buttons {
+  margin-top: 1rem;
+}
+
+.footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.green {
+  background-color: #4caf50;
+  color: white;
+}
+
+button.brown {
+  background-color: #795548;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">A</div>
+        <div>
+          <div style="font-weight:800">AgriMate</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Smart farming companion</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="home.html">Dashboard</a>
+        <a href="seeds.html">Water Calculator</a>
+        <a href="water.html">Seed Estimator</a>
+        <a href="TIPS.html">Farming Tips</a>
+        <a href="GALLERY.HTML">Gallery</a>
+        <a href="index.html">Log Out</a>
+    
+      </nav>
+    </header>
+    <hr style="border: none; border-top: 2px solid #e5e7eb; margin: 0 0 24px 0;">
+    <div class="filter-bar">
+    <button class="active">All Tips</button>
+    <button>Planting Seasons</button>
+    <button>Pest Control</button>
+    <button>Soil Care</button>
+    <button>General Farming</button>
+    <input type="text" placeholder="Search farming tips..." />
+  </div>
+
+  <main class="cards-container">
+    <!-- CARD 1 -->
+    <div class="card beginner">
+      <img src="IMG-20251014-WA0032.jpg" alt="Spring Planting">
+      <div class="content">
+        <div class="label-row">
+          <h2>Spring Planting Guide for Vegetables</h2>
+          <span class="season spring">Spring</span>
+        </div>
+        <ul>
+          <li>Prepare soil by removing weeds and adding compost</li>
+          <li>Check soil temperature - should be at least 50°F</li>
+          <li>Plant seeds according to packet instructions</li>
+          <li>Water gently and consistently</li>
+          <li>Monitor for pests and diseases</li>
+        </ul>
+        <p><strong>Best Time:</strong> Early spring after last frost date</p>
+        <p><strong>Tools Needed:</strong> Shovel, Rake, Seeds, Compost</p>
+        <p><strong>Resources:</strong> USDA Planting Calendar, Local Extension Guidelines</p>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card intermediate">
+      <img src="IMG-20251014-WA0029.jpg" alt="Pest Control">
+      <div class="content">
+        <div class="label-row">
+          <h2>Natural Pest Control Methods</h2>
+          <span class="season summer">Summer</span>
+        </div>
+        <ul>
+          <li>Identify specific pests affecting crops</li>
+          <li>Introduce beneficial insects</li>
+          <li>Apply neem oil spray early morning or evening</li>
+          <li>Use pest-repelling companion plants</li>
+          <li>Install physical barriers</li>
+        </ul>
+        <p><strong>Best Time:</strong> Early morning or evening</p>
+        <p><strong>Tools Needed:</strong> Spray bottle, Row covers, Magnifying glass</p>
+        <p><strong>Resources:</strong> Insect ID Chart, Pest Guide</p>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card intermediate">
+      <img src="IMG-20251014-WA0030.jpg" alt="Soil pH">
+      <div class="content">
+        <div class="label-row">
+          <h2>Soil pH Testing and Amendment</h2>
+          <span class="season fall">Fall</span>
+        </div>
+        <ul>
+          <li>Collect samples from various areas</li>
+          <li>Use test kit or lab to measure pH</li>
+          <li>Apply lime to raise or sulfur to lower pH</li>
+          <li>Recheck soil after 2–3 months</li>
+        </ul>
+        <p><strong>Best Time:</strong> Fall or early spring</p>
+        <p><strong>Tools Needed:</strong> pH test kit, Lime, Sulfur, Shovel</p>
+        <p><strong>Resources:</strong> Soil Lab Directory, Crop pH Chart</p>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card advanced">
+      <img src="IMG-20251014-WA0027.jpg" alt="Water Conservation">
+      <div class="content">
+        <div class="label-row">
+          <h2>Water Conservation Techniques</h2>
+          <span class="season summer">Summer</span>
+        </div>
+        <ul>
+          <li>Install drip irrigation systems</li>
+          <li>Apply mulch to retain soil moisture</li>
+          <li>Water deeply but less frequently</li>
+          <li>Use rain gauges and barrels</li>
+        </ul>
+        <p><strong>Best Time:</strong> Morning to reduce evaporation</p>
+        <p><strong>Tools Needed:</strong> Drip irrigation kit, Rain barrel, Mulch</p>
+        <p><strong>Resources:</strong> Water-Wise Guide, Irrigation Manual</p>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card beginner">
+      <img src="IMG-20251014-WA0028.jpg" alt="Companion Planting">
+      <div class="content">
+        <div class="label-row">
+          <h2>Companion Planting Strategies</h2>
+          <span class="season spring">Spring</span>
+        </div>
+        <ul>
+          <li>Research compatible plant combinations</li>
+          <li>Plant nitrogen-fixing legumes</li>
+          <li>Use aromatic herbs to repel pests</li>
+          <li>Rotate companion plant locations</li>
+        </ul>
+        <p><strong>Best Time:</strong> Regular planting season</p>
+        <p><strong>Tools Needed:</strong> Garden planner, Seeds, Measuring tape</p>
+        <p><strong>Resources:</strong> Companion Planting Chart</p>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card beginner">
+      <img src="IMG-20251014-WA0031.jpg" alt="Composting">
+      <div class="content">
+        <div class="label-row">
+          <h2>Composting for Healthy Soil</h2>
+          <span class="season fall">Fall</span>
+        </div>
+        <ul>
+          <li>Set up compost bin in shaded area</li>
+          <li>Layer green and brown materials</li>
+          <li>Maintain moisture level</li>
+          <li>Turn compost every 2–3 weeks</li>
+        </ul>
+        <p><strong>Best Time:</strong> Year-round; fall best for browns</p>
+        <p><strong>Tools Needed:</strong> Compost bin, Pitchfork, Thermometer</p>
+        <p><strong>Resources:</strong> Compost Basics, Troubleshooting Guide</p>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="card intermediate">
+      <img src="IMG-20251014-WA0032.jpg" alt="Winter Crop Protection">
+      <div class="content">
+        <div class="label-row">
+          <h2>Winter Crop Protection</h2>
+          <span class="season winter">Winter</span>
+        </div>
+        <ul>
+          <li>Monitor weather forecasts</li>
+          <li>Cover sensitive plants</li>
+          <li>Use water-filled containers for heat</li>
+          <li>Apply thick mulch</li>
+        </ul>
+        <p><strong>Best Time:</strong> Before frost and throughout winter</p>
+        <p><strong>Tools Needed:</strong> Row covers, Blankets, Mulch</p>
+        <p><strong>Resources:</strong> Frost Protection Methods</p>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="card beginner">
+      <img src="IMG-20251014-WA0033.jpg" alt="Seed Starting">
+      <div class="content">
+        <div class="label-row">
+          <h2>Seed Starting Indoors</h2>
+          <span class="season winter">Winter</span>
+        </div>
+        <ul>
+          <li>Calculate planting dates</li>
+          <li>Use sterile seed mix</li>
+          <li>Provide consistent light</li>
+          <li>Harden off seedlings</li>
+        </ul>
+        <p><strong>Best Time:</strong> 6–8 weeks before last frost</p>
+        <p><strong>Tools Needed:</strong> Seed trays, Grow lights, Heat mat</p>
+        <p><strong>Resources:</strong> Seed Starting Calendar</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <h3>Ready to Apply These Tips?</h3>
+    <p>Use our farming calculators to plan your resources and get precise estimates for water,
+
+

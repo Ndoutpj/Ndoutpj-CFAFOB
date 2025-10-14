@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AgriMate — Water Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fbfcfa;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --accent:#234e20;
+      --accent-2:#3f8a48;
+      --soft:#f1f6f2;
+      --glass: rgba(255,255,255,0.8);
+      --shadow: 0 10px 30px rgba(15,23,42,0.07);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#071023;background:var(--bg);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:34px auto;padding:28px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:8px 12px;border-radius:10px}
+    nav a.active{background:var(--accent);color:#fff}
+    .signin{padding:8px 12px;border-radius:10px;border:1px solid rgba(7,16,35,0.06);background:#fff}
+
+    /* Title */
+    .hero{text-align:center;margin-bottom:22px}
+    .hero h1{margin:0;font-size:28px}
+    .hero p{color:var(--muted);margin-top:8px}
+
+    /* Main layout */
+    .main{display:grid;grid-template-columns:1fr 420px;gap:22px;margin-top:20px}
+
+    /* Calculator card */
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .calc{padding:22px}
+    .field{display:flex;flex-direction:column;margin-bottom:14px}
+    .label{font-weight:700;color:#0f172a;margin-bottom:8px}
+    .hint{font-size:13px;color:var(--muted);margin-top:6px}
+    input[type="number"],select{padding:12px;border-radius:10px;border:1px solid #eef2ee;background:var(--soft);font-size:14px}
+    .row{display:flex;gap:12px}
+    .btn{padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+    .btn.ghost{background:transparent;border:1px solid rgba(7,16,35,0.06)}
+
+    /* Preview */
+    .preview{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px;color:var(--muted);min-height:320px}
+    .preview .icon{width:84px;height:84px;border-radius:18px;background:linear-gradient(180deg,#f4faf4,#ffffff);display:flex;align-items:center;justify-content:center;border:1px dashed #e6efe6}
+    .preview h3{margin-top:18px}
+
+    /* Quick tips */
+    .quick{padding:18px;border-top:1px solid #f3f6f4;background:linear-gradient(180deg,#fff,#fbfdfb)}
+    .quick ul{margin:0;padding-left:18px;color:var(--muted)}
+
+    /* Related tools */
+    .related{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0}
+    .tile{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);min-height:110px}
+    .tile h4{margin:0 0 8px 0}
+    .tile p{margin:0;color:var(--muted)}
+
+    /* Water tips panel */
+    .tips{margin-top:10px;padding:22px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfffb);box-shadow:var(--shadow);border:1px solid #eef5ec}
+    .tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .tip{display:flex;gap:12px;align-items:flex-start}
+    .badge{width:36px;height:36px;border-radius:8px;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+
+    footer{margin-top:40px;padding:18px;text-align:center;color:var(--muted)}
+
+    /* subtle micro interactions */
+    .card, .tile, .preview{transition:transform 220ms ease, box-shadow 220ms ease}
+    .card:hover, .tile:hover{transform:translateY(-6px)}
+
+    @media (max-width:1050px){
+      .main{grid-template-columns:1fr}
+      .related{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><div class="logo">A</div><div><div style="font-weight:800">AgriMate</div><div style="font-size:13px;color:var(--muted)">Smart farming companion</div></div></div>
+      <nav>
+        <a href="home.html">Dashboard</a>
+        <a class="active" href="seeds.html">Water Calculator</a>
+        <a href="water.html">Seed Estimator</a>
+        <a href="TIPS.html">Farming Tips</a>
+        <a href="GALLERY.HTML">Gallery</a>
+        <a href="index.html" class="signin">Log Out</a>
+        
+      </nav>
+    </header>
+    <hr style="border: none; border-top: 2px solid #e5e7eb; margin: 0 0 24px 0;">
+    <section class="hero">
+      <h1>Water Calculator</h1>
+      <p>Calculate precise daily water requirements for your crops based on farm size and crop type. Make informed irrigation decisions with our smart agricultural tool.</p>
+    </section>
+
+    <section class="main">
+      <div class="card calc">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-weight:800;font-size:16px">Water Calculator</div>
+          <div style="font-size:13px;color:var(--muted)">Ready to calculate</div>
+        </div>
+
+        <div class="field">
+          <label class="label">Farm Size</label>
+          <div class="row">
+            <input id="size" type="number" placeholder="Enter farm size" />
+            <select id="unit">
+              <option value="sqm">Square Meters (m²)</option>
+              <option value="hectare">Hectares (ha)</option>
+              <option value="acre">Acres</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Crop Type</label>
+          <select id="crop">
+            <option value="">Choose your crop type</option>
+            <option value="maize">Maize</option>
+            <option value="wheat">Wheat</option>
+            <option value="soybean">Soybean</option>
+            <option value="potato">Potato</option>
+          </select>
+          <div class="hint">Select the primary crop you want to calculate water requirements for.</div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <button class="btn primary" id="calcBtn">Calculate Water Needs</button>
+          <button class="btn ghost" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="quick">
+          <strong>Quick Tips</strong>
+          <ul>
+            <li>Water requirements vary by season and climate.</li>
+            <li>Consider soil type and drainage in your planning.</li>
+            <li>Monitor weather forecasts to adjust irrigation.</li>
+            <li>These are baseline estimates — adjust for local conditions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="card preview">
+        <div class="icon">💧</div>
+        <h3 id="resultTitle">Ready to Calculate</h3>
+        <div id="resultText" style="color:var(--muted);margin-top:8px;max-width:280px;text-align:center">Enter your farm size and select a crop type to see water requirements</div>
+      </aside>
+    </section>
+
+    <section class="related">
+      <div class="tile"><h4>Seed & Worker Estimator</h4><p>Calculate required seeds and labor for your farm size and crop type.</p><div style="margin-top:10px;font-weight:700;color:var(--accent-2)">Calculate Now →</div></div>
+      <div class="tile"><h4>Farming Tips</h4><p>Expert guidance on irrigation, planting seasons, and crop care.</p><div style="margin-top:10px;font-weight:700;color:var(--accent-2)">Learn More →</div></div>
+      <div class="tile"><h4>Dashboard</h4><p>View weather information and access all agricultural tools.</p><div style="margin-top:10px;font-weight:700;color:var(--accent-2)">Go to Dashboard →</div></div>
+    </section>
+
+    <section class="tips card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="font-weight:800;font-size:16px">Water Conservation Tips</div>
+        <div style="color:var(--muted)">Maximize efficiency and minimize waste with these proven techniques</div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip"><div class="badge">⏰</div><div><strong>Optimal Timing</strong><div class="hint">Water early morning (5-9 AM) or evening (6-8 PM) to reduce evaporation.</div></div></div>
+        <div class="tip"><div class="badge">💧</div><div><strong>Drip Irrigation</strong><div class="hint">Install drip systems to deliver water directly to roots, saving 30–50%.</div></div></div>
+        <div class="tip"><div class="badge">🧪</div><div><strong>Soil Monitoring</strong><div class="hint">Use moisture sensors to avoid over-watering and ensure optimal soil conditions.</div></div></div>
+        <div class="tip"><div class="badge">🌧️</div><div><strong>Rainwater Harvesting</strong><div class="hint">Collect and store rainwater to supplement irrigation during dry periods.</div></div></div>
+      </div>
+    </section>
+
+    <footer>© 2025 AgriMate. Empowering farmers with smart agricultural tools.</footer>
+  </div>
+
+  <script>
+    const calcBtn = document.getElementById('calcBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const sizeInput = document.getElementById('size');
+    const unitSelect = document.getElementById('unit');
+    const cropSelect = document.getElementById('crop');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+
+    const cropET0 = { maize:5.5, wheat:4.2, soybean:4.8, potato:6.0 };
+
+    function toSquareMeters(value, unit){
+      if(!value) return 0;
+      const v = parseFloat(value);
+      if(unit==='sqm') return v;
+      if(unit==='hectare') return v * 10000;
+      if(unit==='acre') return v * 4046.86;
+      return v;
+    }
+
+    calcBtn.addEventListener('click',()=>{
+      const size = parseFloat(sizeInput.value);
+      const unit = unitSelect.value;
+      const crop = cropSelect.value;
+      if(!size || !crop){
+        resultTitle.textContent = 'Incomplete Inputs';
+        resultText.textContent = 'Please enter a valid farm size and select a crop type.';
+        return;
+      }
+      const sqm = toSquareMeters(size,unit);
+      // baseline evapotranspiration * area -> liters/day (approx)
+      const et0 = cropET0[crop] || 5.0; // mm/day
+      const litersPerSqm = et0; // 1 mm over 1 sqm = 1 liter
+      const totalLiters = Math.round(litersPerSqm * sqm);
+      resultTitle.textContent = 'Estimated Daily Water Need';
+      resultText.textContent = totalLiters.toLocaleString() + ' L per day (' + et0 + ' mm/day over ' + Math.round(sqm).toLocaleString() + ' m²)';
+    });
+
+    resetBtn.addEventListener('click',()=>{
+      sizeInput.value='';unitSelect.value='sqm';cropSelect.value='';resultTitle.textContent='Ready to Calculate';resultText.textContent='Enter your farm size and select a crop type to see water requirements';
+    });
+  </script>
+</body>
+</html>
+

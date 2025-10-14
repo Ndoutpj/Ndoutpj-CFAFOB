@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGRIMATE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(34, 139, 34, 0.2);
+      padding: 40px 30px 30px 30px;
+      width: 350px;
+      text-align: center;
+      animation: fadeIn 1.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+      animation: spin 2s linear infinite alternate;
+    }
+    @keyframes spin {
+      0% { transform: rotate(-10deg);}
+      100% { transform: rotate(10deg);}
+    }
+    h1 {
+      color: #388e3c;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    .tab {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      gap: 10px;
+    }
+    .tab button {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      color: #388e3c;
+      padding: 10px 28px;
+      border-radius: 20px 20px 0 0;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+    .tab button.active {
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-bottom: 3px solid #43a047;
+    }
+    form {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 10px;
+      animation: fadeIn 0.7s;
+    }
+    form.active {
+      display: flex;
+    }
+    input[type="text"], input[type="password"], input[type="email"] {
+      padding: 12px;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #f1f8e9;
+      transition: border 0.2s;
+      outline: none;
+    }
+    input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+      border: 1.5px solid #43a047;
+      background: #e8f5e9;
+    }
+    button[type="submit"] {
+      background: linear-gradient(90deg, #43a047 0%, #66bb6a 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 8px 0 rgba(67, 160, 71, 0.08);
+    }
+    button[type="submit"]:hover {
+      background: linear-gradient(90deg, #388e3c 0%, #43a047 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .message {
+      margin-top: 18px;
+      font-size: 15px;
+      min-height: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <svg class="logo" viewBox="0 0 80 80" fill="none">
+      <circle cx="40" cy="40" r="38" stroke="#388e3c" stroke-width="4" fill="#c8e6c9"/>
+      <ellipse cx="40" cy="50" rx="22" ry="14" fill="#66bb6a"/>
+      <path d="M40 50 Q40 30 60 30" stroke="#388e3c" stroke-width="3" fill="none"/>
+      <path d="M40 50 Q40 30 20 30" stroke="#388e3c" stroke-width="3" fill="none"/>
+      <circle cx="40" cy="30" r="7" fill="#388e3c"/>
+    </svg>
+    <h1>AGRIMATE</h1>
+  <div class="tab">
+    <button id="loginTab" class="active" onclick="showForm('login')">Login</button>
+    <button id="signupTab" onclick="showForm('signup')">Sign Up</button>
+  </div>
+    <form id="loginForm" class="active" autocomplete="off" onsubmit="return handleLogin(event)">
+      <input type="text" id="loginUsername" placeholder="Username" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <a href="home.html" style="text-decoration:none; color:inherit; font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; font-weight: bold; padding: 10px 28px; border-radius: 20px 20px 0 0; border-bottom: 3px solid transparent; background: none; outline: none; cursor: pointer; transition: background 0.2s, color 0.2s; background-color: #29b02f;border-radius: 100;">LOGIN</a>
+    </form>
+    <form id="signupForm" autocomplete="off" onsubmit="return handleSignup(event)">
+      <input type="text" id="signupUsername" placeholder="Username" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div class="message" id="message"></div>
+  </div>
+  <script>
+    // Tab switching
+    function showForm(form) {
+      document.getElementById('loginForm').classList.remove('active');
+      document.getElementById('signupForm').classList.remove('active');
+      document.getElementById('loginTab').classList.remove('active');
+      document.getElementById('signupTab').classList.remove('active');
+      if (form === 'login') {
+        document.getElementById('loginForm').classList.add('active');
+        document.getElementById('loginTab').classList.add('active');
+      } else {
+        document.getElementById('signupForm').classList.add('active');
+        document.getElementById('signupTab').classList.add('active');
+      }
+      document.getElementById('message').textContent = '';
+    }
+
+    // Store users in localStorage for demo purposes
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('agrimate_users') || '[]');
+    }
+    function setUsers(users) {
+      localStorage.setItem('agrimate_users', JSON.stringify(users));
+    }
+
+    // Handle Sign Up
+    function handleSignup(e) {
+      e.preventDefault();
+      const username = document.getElementById('signupUsername').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      let users = getUsers();
+      if (users.find(u => u.username === username)) {
+        showMessage('Username already exists!', true);
+        return false;
+      }
+      users.push({ username, email, password });
+      setUsers(users);
+      showMessage('Sign up successful! Please log in.');
+      showForm('login');
+      return false;
+    }
+
+    // Handle Login
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      let users = getUsers();
+      const user = users.find(u => u.username === username && u.password === password);
+      if (user) {
+        showMessage('Login successful! Welcome, ' + username + '!');
+        setTimeout(() => {
+          showMessage('');
+          // Redirect or show dashboard here
+        }, 1500);
+      } else {
+        showMessage('Invalid username or password!', true);
+      }
+      return false;
+    }
+
+    function showMessage(msg, error) {
+      const el = document.getElementById('message');
+      el.textContent = msg;
+      el.style.color = error ? '#d32f2f' : '#388e3c';
+    }
+  </script>
+</body>
+</html>

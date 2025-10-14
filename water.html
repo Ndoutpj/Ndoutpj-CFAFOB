@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriMate | Seed & Worker Estimator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm py-4 px-8 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <div class="w-6 h-6 bg-green-700 rounded flex items-center justify-center text-white font-bold">A</div>
+      <h1 class="text-lg font-semibold text-gray-900">AgriMate</h1>
+    </div>
+    <div class="flex space-x-6 text-sm font-medium">
+      <a href="home.html" class="text-gray-700 hover:text-green-700">Dashboard</a>
+      <a href="seeds.html" class="text-gray-700 hover:text-green-700">Water Calculator</a>
+      <a href="water.html" class="text-green-700 font-semibold border-b-2 border-green-700">Seed Estimator</a>
+      <a href="TIPS.html" class="text-gray-700 hover:text-green-700">Farming Tips</a>
+      <a href="GALLERY.HTML" class="text-gray-700 hover:text-green-700">Gallery</a>
+        <a href="index.html" class="text-gray-700 hover:text-green-700">Log Out</a>
+    </div>
+    
+  </nav>
+
+  <!-- Header Section -->
+  <section class="text-center mt-10 mb-12">
+    <div class="flex justify-center mb-4">
+      <div class="bg-green-700 bg-opacity-10 rounded-full p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+      </div>
+    </div>
+    <h1 class="text-3xl font-bold mb-3">Seed & Worker Estimator</h1>
+    <p class="text-gray-600 max-w-2xl mx-auto">Calculate precise seed quantities and labor requirements for your farming operations. Plan efficiently with our dual estimation tool.</p>
+  </section>
+
+  <!-- Calculator Section -->
+  <section class="max-w-5xl mx-auto bg-white shadow-md rounded-2xl p-8 mb-12">
+    <h2 class="text-lg font-semibold text-gray-800 mb-6 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" /></svg>
+      Seed & Worker Calculator
+    </h2>
+    <p class="text-gray-500 mb-6">Calculate seed quantities and labor requirements for your farm</p>
+    <form id="estimatorForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium mb-2">Farm Size <span class="text-red-500">*</span></label>
+        <input id="farmSize" type="number" placeholder="Enter farm size" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" required />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-2">Crop Type <span class="text-red-500">*</span></label>
+        <select id="cropType" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" required>
+          <option value="">Select an option</option>
+          <option value="maize">Maize</option>
+          <option value="wheat">Wheat</option>
+          <option value="soybeans">Soybeans</option>
+          <option value="tomatoes">Tomatoes</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-2">Unit</label>
+        <select id="unit" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-700">
+          <option value="sqm">Square Meters (m²)</option>
+          <option value="ha">Hectares (ha)</option>
+          <option value="acres">Acres</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-2">Planting Method <span class="text-red-500">*</span></label>
+        <select id="plantingMethod" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-700" required>
+          <option value="direct">Direct Seeding</option>
+          <option value="transplant">Transplanting</option>
+        </select>
+      </div>
+    </form>
+    <div class="text-center mt-8">
+      <button id="calculateBtn" class="bg-green-700 hover:bg-green-800 text-white font-medium py-3 px-8 rounded-lg transition">Calculate Requirements</button>
+    </div>
+
+    <div id="results" class="mt-10 hidden bg-green-50 border border-green-200 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-green-800 mb-4">Estimation Results</h3>
+      <p id="seedResult" class="text-gray-700 mb-2"></p>
+      <p id="workerResult" class="text-gray-700"></p>
+    </div>
+  </section>
+
+  <!-- Instructions -->
+  <section class="max-w-3xl mx-auto mb-16">
+    <h3 class="text-lg font-semibold text-green-800 mb-4 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 0a2 2 0 100-4H7a2 2 0 100 4zm0 0v4a2 2 0 11-4 0v-4m4 0H9" /></svg>
+      How to Use This Tool
+    </h3>
+    <ul class="list-disc ml-6 text-gray-700 space-y-2">
+      <li>Enter your farm size in square meters, hectares, or acres.</li>
+      <li>Select the crop you want to plant from our comprehensive database.</li>
+      <li>Choose your preferred planting method for accurate calculations.</li>
+      <li>Click calculate to get both seed quantities and worker requirements.</li>
+      <li>Use the comparison tool to evaluate different crop options.</li>
+      <li>Export your results as PDF or CSV for future reference.</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-6 text-center text-sm text-gray-600 border-t border-gray-200">
+    <p>© 2025 AgriMate. Empowering farmers with smart agricultural tools.</p>
+  </footer>
+
+  <script>
+    document.getElementById('calculateBtn').addEventListener('click', function() {
+      const size = parseFloat(document.getElementById('farmSize').value);
+      const crop = document.getElementById('cropType').value;
+      const unit = document.getElementById('unit').value;
+      const method = document.getElementById('plantingMethod').value;
+
+      if (!size || !crop || !method) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+
+      // Unit conversion to square meters
+      let areaSqm = size;
+      if (unit === 'ha') areaSqm = size * 10000;
+      if (unit === 'acres') areaSqm = size * 4046.86;
+
+      // Basic crop data (seed rate in kg/ha and workers per ha)
+      const cropData = {
+        maize: { seedRate: 25, workers: 2 },
+        wheat: { seedRate: 120, workers: 1.5 },
+        soybeans: { seedRate: 70, workers: 2 },
+        tomatoes: { seedRate: 0.3, workers: 4 }
+      };
+
+      const selected = cropData[crop];
+      const areaHa = areaSqm / 10000;
+
+      const seedNeeded = selected.seedRate * areaHa;
+      const workersNeeded = selected.workers * areaHa;
+
+      document.getElementById('seedResult').innerText = `Estimated Seeds Required: ${seedNeeded.toFixed(2)} kg`;
+      document.getElementById('workerResult').innerText = `Estimated Workers Needed: ${workersNeeded.toFixed(1)} workers`;
+      document.getElementById('results').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

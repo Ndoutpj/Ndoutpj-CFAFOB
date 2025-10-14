@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AgriMate — Smart Farming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7faf7;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --accent-green:#2f7a3e;
+      --green-gradient: linear-gradient(90deg,#2d6b36 0%, #8fbf86 100%);
+      --glass: rgba(255,255,255,0.7);
+      --shadow: 0 8px 20px rgba(15,23,42,0.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:var(--bg);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+    }
+    .container{max-width:1100px;margin:0 auto}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(180deg,#1b6b2f,#2f7a3e);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav{display:flex;gap:18px;align-items:center;color:var(--accent-green)}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+    .cta{display:flex;gap:10px}
+    .btn{padding:8px 14px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:var(--card);cursor:pointer;font-weight:600}
+    .btn.primary{background:var(--accent-green);color:#fff;border:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start;margin-bottom:36px}
+    .hero-left{background:transparent}
+    .weather-card{background:linear-gradient(90deg,#2b84d1,#2b9ad1);color:#fff;padding:22px;border-radius:14px;box-shadow:var(--shadow);position:relative}
+    .weather-top{display:flex;justify-content:space-between;align-items:center}
+    .location{font-weight:700}
+    .temp{font-size:48px;font-weight:700}
+    .weather-forecast{display:flex;gap:8px;margin-top:18px}
+    .forecast-day{flex:1;background:rgba(255,255,255,0.08);padding:10px;border-radius:8px;text-align:center}
+
+    .community{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow);}
+    .community h4{margin:0 0 8px 0}
+    .metrics{display:flex;gap:12px;flex-wrap:wrap}
+    .metric{flex:1;min-width:120px}
+    .metric .num{font-weight:700}
+
+    /* Tools */
+    .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:42px}
+    .tool{padding:20px;border-radius:12px;color:#fff;min-height:110px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between}
+    .tool h3{margin:0;font-size:16px}
+    .tool p{margin:6px 0 0 0;font-size:13px;opacity:0.95}
+    .tool.water{background:linear-gradient(135deg,#2b7a4a,#6dbd6e)}
+    .tool.seed{background:linear-gradient(135deg,#1fa3a3,#5ad0c9)}
+    .tool.worker{background:linear-gradient(135deg,#a86b3a,#d99c6f)}
+    .tool.tips{background:linear-gradient(135deg,#f6a84d,#f9c28a)}
+
+    /* Featured */
+    .featured{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-bottom:32px}
+    .card{background:var(--card);padding:0;border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+    .card .content{padding:18px}
+    .soil-image{height:220px;background-image:linear-gradient(180deg,#0f172a20,#0f172a00);background-size:cover;display:flex;align-items:end;padding:18px;color:#fff}
+    .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:18px}
+    .gallery-grid img{width:100%;height:100px;object-fit:cover;border-radius:8px;background:#e6eef0}
+
+    /* CTA */
+    .cta-banner{border-radius:12px;padding:26px;background:var(--green-gradient);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}
+    .cta-buttons{display:flex;gap:12px}
+    .cta .btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff}
+
+    footer{display:flex;align-items:center;justify-content:center;color:var(--muted);gap:8px;padding:12px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .featured{grid-template-columns:1fr}
+      .tools{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      body{padding:16px}
+      .tools{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">A</div>
+        <div>
+          <div style="font-weight:800">AgriMate</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Smart farming companion</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="home.html">Dashboard</a>
+        <a href="seeds.html">Water Calculator</a>
+        <a href="water.html">Seed Estimator</a>
+        <a href="TIPS.html">Farming Tips</a>
+        <a href="GALLERY.HTML">Gallery</a>
+        <a href="index.html">Log Out</a>
+    
+      </nav>
+    </header>
+    <hr style="border: none; border-top: 2px solid #e5e7eb; margin: 0 0 24px 0;">
+<br><br>
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <div style="margin-bottom:18px">
+            <h1 style="margin:0 0 6px 0;font-size:22px ;text-align: center;">Welcome to AgriMate</h1>
+            <p style="margin:0;color:var(--muted);text-align: center;">Your intelligent farming companion for smarter agriculture. Get weather updates, calculate resources, and access expert guidance all in one place.</p>
+          </div>
+
+          <div style="display:flex;gap:18px;align-items:flex-start">
+            <div class="weather-card" style="flex:1;min-width:360px">
+              <div class="weather-top">
+                <div>
+                  <div class="location">Thohoyandou, Limpopo</div>
+                  <div style="font-size:12px;opacity:0.9">Current Weather</div>
+                </div>
+                <div style="text-align:right">
+                  <div class="temp">28&deg;C</div>
+                  <div style="font-size:13px;opacity:0.95">Sunny • 45% • 12 mph</div>
+                </div>
+              </div>
+
+              <div class="weather-forecast">
+                <div class="forecast-day">
+                  <div style="font-weight:700">Today</div>
+                  <div style="font-size:13px;opacity:0.95">30&deg; / 18&deg;</div>
+                </div>
+                <div class="forecast-day">
+                  <div style="font-weight:700">Tomorrow</div>
+                  <div style="font-size:13px;opacity:0.95">32&deg; / 20&deg;</div>
+                </div>
+                <div class="forecast-day">
+                  <div style="font-weight:700">Wed</div>
+                  <div style="font-size:13px;opacity:0.95">29&deg; / 17&deg;</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="community card" style="width:320px">
+              <h4 style="margin-bottom:6px;text-align: center;">Community Impact <span style="font-size:12px;color:var(--muted);font-weight:600">• This month</span></h4>
+              <div class="metrics">
+                <div class="metric"><div class="num" style="padding-left: 40px;">1,247</div><div style="font-size:12px;color:var(--muted);padding-left: 20px;">Active Farms</div></div>
+                <div class="metric"><div class="num" style="padding-left: 40px;">2.3M L</div><div style="font-size:12px;color:var(--muted);padding-left: 20px;">Water Saved</div></div>
+                <div class="metric"><div class="num" style="padding-left: 40px;">45.2K</div><div style="font-size:12px;color:var(--muted);padding-left: 20px;">Seeds Planted</div></div>
+                <div class="metric"><div class="num" style="padding-left: 40px;">892</div><div style="font-size:12px;color:var(--muted);padding-left: 20px;">Tips Shared</div></div>
+              </div>
+              <div style="font-size:12px;color:var(--muted);margin-top:12px;text-align: center[o];">Join thousands of farmers making a difference with smart agriculture</div>
+            </div>
+          </div>
+
+          <h2 style="margin-top:28px;text-align: center;">Smart Farming Tools</h2>
+          <p style="margin:4px 0 18px 0;color:var(--muted);text-align: center;">Powerful calculators and estimators designed to optimize your farming operations</p>
+
+          <div class="tools">
+            <div class="tool water">
+              <div>
+                <h3>Water Calculator</h3>
+                <p>Calculate precise irrigation requirements based on your crop type and farm size for optimal water usage.</p>
+              </div>
+              <div style="font-size:12px;opacity:0.95">Avg. Savings • 30% &nbsp; <span style="float:right">Get Started →</span></div>
+            </div>
+
+            <div class="tool seed">
+              <div>
+                <h3>Seed Estimator</h3>
+                <p>Determine the exact amount of seeds needed for your planting area with our intelligent estimation tool.</p>
+              </div>
+              <div style="font-size:12px;opacity:0.95">Accuracy Rate • 85% &nbsp; <span style="float:right">Get Started →</span></div>
+            </div>
+
+            <div class="tool worker">
+              <div>
+                <h3>Worker Estimator</h3>
+                <p>Plan your labor requirements efficiently by calculating the optimal number of workers needed.</p>
+              </div>
+              
+              
+              <div style="font-size:12px;opacity:0.95">Time Saved • 2 hrs &nbsp; <span style="float:right">Get Started →</span></div>
+            </div>
+
+            <div class="tool tips">
+              <div>
+                <h3>Farming Tips</h3>
+                <p>Access expert agricultural guidance covering planting seasons, pest control, and soil management.</p>
+              </div>
+              <div style="font-size:12px;opacity:0.95">Tips Available • 150+ &nbsp; <span style="float:right">Get Started →</span></div>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div style="text-align:right;color:var(--muted);font-size:13px;margin-bottom:10px">Featured Content</div>
+
+          <div class="card" style="margin-bottom:18px;overflow:hidden">
+            <div class="soil-image" style="background-image:url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=60')">
+              <div style="background:linear-gradient(180deg,rgba(0,0,0,0.0),rgba(0,0,0,0.5));padding:12px;border-radius:8px">
+                <div style="font-size:13px;font-weight:700">Soil Health Management</div>
+                <div style="font-size:12px;color:#e6e6e6;margin-top:6px">Regular composting and crop rotation maintain soil fertility and prevent nutrient depletion.</div>
+              </div>
+            </div>
+            <div class="content">
+              <div style="font-size:12px;color:var(--muted)">4 min read</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:18px;border-bottom:1px solid #f1f5f4">
+              <div>
+                <div style="font-weight:700">Farm Gallery</div>
+                <div style="font-size:12px;color:var(--muted)">Inspiring agricultural moments</div>
+              </div>
+              <div style="font-size:12px;color:var(--muted)">View All →</div>
+            </div>
+
+            <div class="gallery-grid">
+              <img src="IMG-20251014-WA0027.jpg" alt="Farm landscape">
+              <img src="IMG-20251014-WA0028.jpg" alt="Sunset over fields">
+              <img src="IMG-20251014-WA0029.jpg" alt="Lighthouse in farmland">
+              <img src="IMG-20251014-WA0030.jpg" alt="Wheat field">
+            </div>
+
+            <div style="padding:14px;border-top:1px solid #f1f5f4;text-align:center;font-size:13px;color:var(--muted)">Explore Full Gallery</div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="cta-banner">
+        <div>
+          <div style="font-weight:700;font-size:18px">Ready to Start Smart Farming?</div>
+          <div style="font-size:14px;opacity:0.95;margin-top:6px">Join thousands of farmers who are already using AgriMate to optimize their agricultural operations and increase their yields.</div>
+        </div>
+        <div class="cta-buttons">
+          <a href="water.html" class="btn primary" style="text-decoration: none;">Start Calculating</a>
+          <button class="btn">Learn More</button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="logo" style="width:26px;height:26px;font-size:14px">A</div>
+        <div style="font-size:14px">AgriMate</div>
+      </div>
+      <div style="margin-left:12px;color:var(--muted);font-size:13px">© 2025 AgriMate. Empowering farmers with smart agricultural solutions.</div>
+    </footer>
+  </div>
+
+  <script>
+    // small interactive touches
+    document.querySelectorAll('.tool').forEach(t=>{
+      t.addEventListener('mouseenter',()=>t.style.transform='translateY(-6px)');
+      t.addEventListener('mouseleave',()=>t.style.transform='translateY(0)');
+      t.style.transition='transform 200ms ease';
+    });
+  </script>
+</body>
+</html>
